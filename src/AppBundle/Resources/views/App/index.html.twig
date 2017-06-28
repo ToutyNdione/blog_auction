@@ -1,0 +1,33 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}AppBundle:App:index{% endblock %}
+
+{% block body %}
+<h1>Welcome to the Auction Blog</h1>
+<nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">        
+      </div>
+
+      <ul class="nav navbar-nav navbar-right">
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                <li>{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</li> 
+                       <li><a href="/logout"><i class="fa fa-shield"></i> LOGOUT</a></li>
+                <li><a href="{{ path('fos_user_profile_edit') }}">EDIT PROFILE</a></li>
+                <li><a href="{{ path('fos_user_change_password') }}">RESET PASSWORD</a></li>
+                <li><a href="/delete/">DELETE ACCOUNT</a></li>
+
+            {% else %}
+        <li><a href="/register"><i class="fa fa-shield"></i> SIGN UP</a></li>
+        <li><a href="/login"><i class="fa fa-comment"></i> LOGIN</a></li>
+            {% endif %}
+
+        <li><a href="/user"><i class="fa fa-comment"></i> USERS</a></li>
+         <li><a href="{{ path('product_index')}}">PRODUCTS</a></li>
+         <li><a href="{{ path('category_index')}}">CATEGORIES</a></li>
+
+      </ul>      
+    </div>
+  </nav>
+
+{% endblock %}
